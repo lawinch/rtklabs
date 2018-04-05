@@ -12,7 +12,7 @@ create user webapp password ''
 5. Выполнить в консоли команду
 ```bash
 mvn install
-```bash
+```
 6. Перейти в подкаталог target и выполнить 
 ```bash
 java -jar testapp-1.0-SNAPSHOT.jar
