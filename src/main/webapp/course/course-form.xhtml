@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Instructor edit form</title>
+</h:head>
+
+<ui:composition template="../layout.xhtml">
+	<f:event type="preRenderView" listener="#{courseController.clear}" />
+	<ui:define name="courses_content">
+		<h:form id="coursesForm">
+			<p:panel header="Course Details">
+				<h:panelGrid columns="1">
+					<p:outputLabel for="name" value="Title: " />
+					<p:inputText id="name" value="#{courseController.course.name}" />
+					<p:outputLabel for="instructors" value="Instructors: " />
+					<h:selectManyListbox id="instructors" value="#{courseController.selectedInstructors}">
+							<f:selectItems value="#{courseController.instructors}" var="s"
+										   itemLabel="#{s.surname} #{s.name}" itemValue="#{s.id}" />
+					</h:selectManyListbox>
+					<p:outputLabel for="students" value="Students: " />
+					<h:selectManyListbox id="students" value="#{courseController.selectedStudents}">
+						<f:selectItems value="#{courseController.students}" var="s"
+									   itemLabel="#{s.surname} #{s.name}" itemValue="#{s.id}" />
+					</h:selectManyListbox>
+					<h:commandButton value="Save" action="#{courseController.save}" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

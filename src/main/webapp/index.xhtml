@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="layout.xhtml">
+	<ui:define name="instructors_content">
+		<h:form id="form_instructors">
+			<p:panel header="Instructors List">
+				<p:dataTable id="table_instructors" var="instructor" value="#{indexController.instructors}">
+					<p:column style="width:30px;">
+						<f:facet name="header"># Id</f:facet>
+						<h:outputText value="#{instructor.id}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Name</f:facet>
+						<h:outputText value="#{instructor.name}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Surname</f:facet>
+						<h:outputText value="#{instructor.surname}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Students</f:facet>
+						<ui:repeat value="#{instructor.students}" var="stud" varStatus="status">
+							#{stud.surname}#{status.last ? '' : ', '}
+						</ui:repeat>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Courses</f:facet>
+						<ui:repeat value="#{instructor.courses}" var="course" varStatus="status">
+							#{course.name}#{status.last ? '' : ', '}
+						</ui:repeat>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton id="delete-instructor-button"
+										 action="#{indexController.delete(instructor)}"
+										 value="Delete" />
+						<h:commandButton id="edit-instructor-button"
+										 action="#{indexController.edit(instructor)}"
+										 value="Edit" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="students_content">
+		<h:form id="form_students">
+			<p:panel header="Students List">
+				<p:dataTable id="table_students" var="student" value="#{indexController.students}">
+					<p:column style="width:30px;">
+						<f:facet name="header"># Id</f:facet>
+						<h:outputText value="#{student.id}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Name</f:facet>
+						<h:outputText value="#{student.name}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Surname</f:facet>
+						<h:outputText value="#{student.surname}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Instructors</f:facet>
+						<ui:repeat value="#{student.instructors}" var="inst" varStatus="status">
+							#{inst.surname}#{status.last ? '' : ','}
+						</ui:repeat>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Courses</f:facet>
+						<ui:repeat value="#{student.courses}" var="course" varStatus="status">
+							#{course.name}#{status.last ? '' : ', '}
+						</ui:repeat>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton id="delete-student-button"
+										 action="#{indexController.delete(student)}"
+										 value="Delete" />
+						<h:commandButton id="edit-student-button"
+										 action="#{indexController.edit(student)}"
+										 value="Edit" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+
+	<ui:define name="courses_content">
+		<h:form id="form_courses">
+			<p:panel header="Courses List">
+				<p:dataTable id="table_courses" var="course" value="#{indexController.courses}">
+					<p:column style="width:30px;">
+						<f:facet name="header"># Id</f:facet>
+						<h:outputText value="#{course.id}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Course name</f:facet>
+						<h:outputText value="#{course.name}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Instructors</f:facet>
+						<ui:repeat value="#{course.instructors}" var="inst" varStatus="status">
+							#{inst.surname}#{status.last ? '' : ','}
+						</ui:repeat>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Students</f:facet>
+						<ui:repeat value="#{course.students}" var="stud" varStatus="status">
+							#{stud.surname}#{status.last ? '' : ', '}
+						</ui:repeat>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton id="delete-course-button"
+										 action="#{indexController.delete(course)}"
+										 value="Delete" />
+						<h:commandButton id="edit-course-button"
+										 action="#{indexController.edit(course)}"
+										 value="Edit" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
+</html>
